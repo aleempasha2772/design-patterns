@@ -42,14 +42,41 @@ class ThreadSafeSignleton{
     }
 }
 
+class DoubleCheckedLockingSingleton {
+    private static volatile DoubleCheckedLockingSingleton instance;
+
+    private DoubleCheckedLockingSingleton() {}
+
+    public static DoubleCheckedLockingSingleton getInstance() {
+        if (instance == null) {
+            synchronized (DoubleCheckedLockingSingleton.class) {
+                if (instance == null) {
+                    instance = new DoubleCheckedLockingSingleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+enum EnumSingleton {
+    INSTANCE;
+
+    public static EnumSingleton doSomething() {
+        // Your business logic
+        System.out.println("Doing something...");
+        return null;
+    }
+}
+
 
 public class SingletonExample {
     public static void main(String Args[]){
         System.out.println("this is singleton example class");
 
-        ThreadSafeSignleton instance = ThreadSafeSignleton.getInstance();
+        EnumSingleton instance = EnumSingleton.doSomething();
         System.out.println(instance);
-        ThreadSafeSignleton instance1 = ThreadSafeSignleton.getInstance();
-        System.out.println(instance1);
+        EnumSingleton instance1 = EnumSingleton.doSomething();
+        System.out.println(instance);
     }
 }
