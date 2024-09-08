@@ -28,14 +28,28 @@ class EagerSingleon{
     }
 }
 
+class ThreadSafeSignleton{
+
+    private static ThreadSafeSignleton instance ;
+
+    private ThreadSafeSignleton(){}
+
+    public static synchronized ThreadSafeSignleton getInstance(){
+        if (instance == null){
+            return new ThreadSafeSignleton();
+        }
+        return instance;
+    }
+}
+
 
 public class SingletonExample {
     public static void main(String Args[]){
         System.out.println("this is singleton example class");
 
-        EagerSingleon instance = EagerSingleon.getInstance();
+        ThreadSafeSignleton instance = ThreadSafeSignleton.getInstance();
         System.out.println(instance);
-        EagerSingleon instance1 = EagerSingleon.getInstance();
+        ThreadSafeSignleton instance1 = ThreadSafeSignleton.getInstance();
         System.out.println(instance1);
     }
 }
