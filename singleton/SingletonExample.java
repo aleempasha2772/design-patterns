@@ -18,16 +18,24 @@ class LazySingleton {
 
 }
 
+class EagerSingleon{
+    private static EagerSingleon instance = new EagerSingleon();
 
+    private EagerSingleon(){}
+
+    public static EagerSingleon getInstance(){
+        return instance;
+    }
+}
 
 
 public class SingletonExample {
     public static void main(String Args[]){
         System.out.println("this is singleton example class");
 
-        LazySingleton instance = LazySingleton.getInstance();
+        EagerSingleon instance = EagerSingleon.getInstance();
         System.out.println(instance);
-        LazySingleton instance1 = LazySingleton.getInstance();
+        EagerSingleon instance1 = EagerSingleon.getInstance();
         System.out.println(instance1);
     }
 }
